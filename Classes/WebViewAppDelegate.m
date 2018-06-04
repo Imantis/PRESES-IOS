@@ -66,16 +66,18 @@ bool IsGrantedNotificationAccess;
 /* TEST TIMER */
 -(void) testtimer{
     NSLog(@"imant timer");
-    [self getCookies];
+    //[self getCookies];
     //[self showNotification];
-    //[self setCookiePreference];
+    [self setCookiePreference];
     
 }
 
 - (void)setCookiePreference {
+    //GET COOKIE
+    [self getCookies];
     
     //GET PREFERENCE
-   NSString *wish_list_preference = [[NSUserDefaults standardUserDefaults]
+    wish_list_preference = [[NSUserDefaults standardUserDefaults]
                                      stringForKey:@"wishList"];
     //IF PREFERENCE == null then create "{}" value
     if(wish_list_preference){
@@ -87,7 +89,7 @@ bool IsGrantedNotificationAccess;
     
     NSLog(@"%@", wish_list_preference);
     
-    wish_list_preference = @"{ \"84356\": { \"id\": \"84356\", \"count\": \"3\", }, \"84376\": { \"id\": \"84376\", \"count\": \"3\", }, \"84370\": { \"id\": \"84370\", \"count\": \"3\", }, \"84368\": { \"id\": \"84368\", \"count\": \"3\", }, \"84352\": { \"id\": \"84352\", \"count\": \"3\", } } ​";
+    //wish_list_preference = @"{ \"84356\": { \"id\": \"84356\", \"count\": \"3\", }, \"84376\": { \"id\": \"84376\", \"count\": \"3\", }, \"84370\": { \"id\": \"84370\", \"count\": \"3\", }, \"84368\": { \"id\": \"84368\", \"count\": \"3\", }, \"84352\": { \"id\": \"84352\", \"count\": \"3\", } } ​";
     
     //NSData *data = [wish_list_preference dataUsingEncoding:NSUTF8StringEncoding];
     //id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -106,6 +108,18 @@ bool IsGrantedNotificationAccess;
         }
     }] resume];
     
+    
+    //PATTERN
+    /*
+    NSError *error = nil;
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:@"[aZ]" options:0 error:&error];
+    if (error) {
+        // Do something when an error occurs
+        NSLog(@"Error in pattern");
+    }
+    NSString *candidate = @"abc";
+    BOOL lookingAt = [expression numberOfMatchesInString:candidate options:NSMatchingAnchored range:NSMakeRange(0, candidate.length)] > 0;
+    */
     
     //SAVE NEW PREFERENCE
     [[NSUserDefaults standardUserDefaults] setObject:wish_list_preference forKey:@"wishList"];
@@ -135,6 +149,9 @@ bool IsGrantedNotificationAccess;
         NSLog(@"value: '%@'\n",  [cookie value]);
         NSLog(@"domain: '%@'\n", [cookie domain]);
         NSLog(@"path: '%@'\n",   [cookie path]);
+        if([[cookie name] isEqualToString:@"wishlist"]){
+            NSLog(@"YESS~!!!");
+        }
     }
 }
 
