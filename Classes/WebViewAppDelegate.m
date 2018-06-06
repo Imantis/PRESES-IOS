@@ -127,7 +127,6 @@ bool IsGrantedNotificationAccess;
         if(!([wishListPreferenceJson objectForKey:wish])){
             NSLog(@"ADD WISH: '%@'\n",wish);
 
-            
             //NSString *newString = @"{\"84999\":{\"id\":\"84999\",\"count\":\"111\"}}";
             NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s", @"{\"", wish, @"\":{\"id\":\"", wish, "\",\"count\":\"111\"}}"];
             
@@ -138,47 +137,32 @@ bool IsGrantedNotificationAccess;
             NSLog(@"%@",wishListNEW);
 
             [wishListPreferenceJson addEntriesFromDictionary:wishListNEW];
-            
-          /*
-            NSString *last = @"lastName";
-            NSString *first = @"firstName";
-            NSString *suffix = @"suffix";
-            NSString *title = @"title";
-            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         @"Jo", first, @"Smith", last, nil];
-            NSDictionary *newDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"Jones", last, @"Hon.", title, @"J.D.", suffix, nil];
-            [dict addEntriesFromDictionary: newDict];
-            [dict addEntriesFromDictionary:wishListNEW];
-         
-            NSLog(@"%@",[dict objectForKey:@"84999"]);
-            */
-            
-            //[wishListNEW add]
-            //[wishListPreferenceJson insertObject:wishListNEW atIndex:0];
-            //[wishListPreferenceJson ]
-            //[wishListPreferenceJson addObjectsFromArray:wishListNEW];
-            //[wishListPreferenceJson removeObject:(nonnull id)]
-           // [wishListPreferenceJson addObject:wishListNEW];
-//            addJsonString= @"{\"84999\":{\"id\":\"84999\",\"count\":\"666\"}}";
-//            datas = [addJsonString dataUsingEncoding:NSUTF8StringEncoding];
-//            addJsonJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//
-//            NSLog(@"%@",[[addJsonJson objectForKey:@"84999"] objectForKey:@"count"]);
-           // [wishListPreferenceJson addObject:addJsonJson];
         }
     }
     
     
     NSLog(@"AFTER ADD %@",wishListPreferenceJson);
-    //@try {
-      //  [wishListPreferenceJson removeObject:@"84351"];
-//    }
-//    @catch (NSException *exception) {
-//        NSLog(@"%@", exception.reason);
-//    }
-//    @finally {
-//    }
+
+    //DELETE WISH
+    for(NSString *wish in cookieListWish){
+        //NSLog(@"WISH2: '%@'\n",wish);
+        if(!([wishListPreferenceJson objectForKey:wish])){
+            NSLog(@"ADD WISH: '%@'\n",wish);
+            
+            //NSString *newString = @"{\"84999\":{\"id\":\"84999\",\"count\":\"111\"}}";
+            NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s", @"{\"", wish, @"\":{\"id\":\"", wish, "\",\"count\":\"111\"}}"];
+            
+            
+            NSData *data = [combined dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *wishListNEW = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            NSLog(@"%@",wishListNEW);
+            
+            [wishListPreferenceJson addEntriesFromDictionary:wishListNEW];
+        }
+    }
+    
+    NSLog(@"AFTER DELETE %@",wishListPreferenceJson);
     
     //NEW WISH LIST
 //    for(id wishJson in wishListPreferenceJson){
