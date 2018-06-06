@@ -12,8 +12,10 @@
 @interface WebViewAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UINavigationController *navigationController;
-    NSString *wish_list_preference;
+    NSString *wishListPreference;
+    NSArray *cookieListWish;
 }
+
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navigationController;
