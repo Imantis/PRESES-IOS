@@ -7,7 +7,7 @@
 //
 
 #import "WebViewController.h"
-
+#import "WebViewAppDelegate.h"
 
 @implementation WebViewController
 
@@ -123,6 +123,12 @@
     [self updateToolbar];
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"]; 
     [whirl stopAnimating];
+    
+ //   [WebViewAppDelegate setCookiePreferenceTimer];
+    
+    WebViewAppDelegate* mainVC = [[WebViewAppDelegate alloc] init];
+    
+    [mainVC setCookiePreferenceTimer];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

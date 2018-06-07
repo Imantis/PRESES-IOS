@@ -14,8 +14,10 @@
 	UINavigationController *navigationController;
     NSString *wishListPreference;
     NSArray *cookieListWish;
+    NSString *webUrl;
 }
 
+-(void) setCookiePreferenceTimer;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navigationController;

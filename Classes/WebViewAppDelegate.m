@@ -40,9 +40,16 @@ bool IsGrantedNotificationAccess;
     
     //===============================================
     
-    /* TEST TIMER WORK */
-    [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(testtimer) userInfo:nil repeats:YES];
+    /* TEST TIMER SET COOKIEE PREFENECE */
+    //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(setCookiePreferenceTimer) userInfo:nil repeats:YES];
     /* TEST TIMER */
+    
+    /* TEST SCHEDULE CHECK UPDATES */
+    //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(checkUpdatesTimer) userInfo:nil repeats:YES];
+
+    
+    
+    /* TEST SCHEDULE */
     
     //===============================================
 
@@ -56,7 +63,8 @@ bool IsGrantedNotificationAccess;
     navigationController.toolbar.barStyle = UIBarStyleBlack;
 	WebViewController *webViewController = [[WebViewController alloc] init];
 	webViewController.urlString = @"http://www3.presesserviss.lv";
-	
+    webUrl = webViewController.urlString;
+    
 	[navigationController pushViewController:webViewController animated:NO];
 	[webViewController release];
 	
@@ -67,13 +75,20 @@ bool IsGrantedNotificationAccess;
     return YES;
 }
 
-/* TEST TIMER */
--(void) testtimer{
-    NSLog(@"imant timer");
+/* TIMER CHECK UPDATES */
+-(void) checkUpdatesTimer{
+    NSLog(@"imant CHECK UPDATES");
     //[self getCookies];
-    [self showNotification];
+    //[self showNotification];
+    //[self setCookiePreference];
+}
+
+/* TIMER SET COOKIE PREFERENCE */
+-(void) setCookiePreferenceTimer{
+    NSLog(@"imant SET COOKIE PREFERENCE");
+    //[self getCookies];
+    //[self showNotification];
     [self setCookiePreference];
-    
 }
 
 - (void)setCookiePreference {
@@ -85,9 +100,9 @@ bool IsGrantedNotificationAccess;
                                      stringForKey:@"wishList"];
     //IF PREFERENCE == null then create "{}" value
     if(wishListPreference){
-        NSLog(@"if true");
+        NSLog(@"Have prefernce");
     }else{
-        NSLog(@"if false");
+        NSLog(@"Haven't preference");
         wishListPreference = @"{}";
     }
     
@@ -99,6 +114,8 @@ bool IsGrantedNotificationAccess;
    // NSLog(@"%@",wishListPreferenceJson);
 
     NSMutableDictionary *wishListPreferenceJson = [[NSMutableDictionary alloc] init];
+    
+    //[wishListPreferenceJson removeObjectForKey:@""];
     [wishListPreferenceJson addEntriesFromDictionary:wishListPreferenceJsonBuf];
    
     NSLog(@"AFTER PREFERENCE %@",wishListPreferenceJson);
@@ -128,7 +145,7 @@ bool IsGrantedNotificationAccess;
             NSLog(@"ADD WISH: '%@'\n",wish);
 
             //NSString *newString = @"{\"84999\":{\"id\":\"84999\",\"count\":\"111\"}}";
-            NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s", @"{\"", wish, @"\":{\"id\":\"", wish, "\",\"count\":\"111\"}}"];
+            NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s", @"{\"", wish, @"\":{\"id\":\"", wish, "\",\"count\":\"null\"}}"];
             
             
             NSData *data = [combined dataUsingEncoding:NSUTF8StringEncoding];
@@ -144,26 +161,55 @@ bool IsGrantedNotificationAccess;
     NSLog(@"AFTER ADD %@",wishListPreferenceJson);
 
     //DELETE WISH
-    for(NSString *wish in cookieListWish){
-        //NSLog(@"WISH2: '%@'\n",wish);
-        if(!([wishListPreferenceJson objectForKey:wish])){
-            NSLog(@"ADD WISH: '%@'\n",wish);
-            
-            //NSString *newString = @"{\"84999\":{\"id\":\"84999\",\"count\":\"111\"}}";
-            NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s", @"{\"", wish, @"\":{\"id\":\"", wish, "\",\"count\":\"111\"}}"];
-            
-            
-            NSData *data = [combined dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *wishListNEW = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            NSLog(@"%@",wishListNEW);
-            
-            [wishListPreferenceJson addEntriesFromDictionary:wishListNEW];
+    NSMutableArray *deleteWishList = [[NSMutableArray alloc] init];
+    for(NSString* key in wishListPreferenceJson) {
+        
+        //[wishListPreferenceJson removeObjectForKey:key];
+        //id value = wishListPreferenceJson[key];
+        //if ([cookieListWish indexOfObjectIdenticalTo:[[wishListPreferenceJson objectForKey:key] objectForKey:@"id"]]){
+            //NSLog(@"DELETE THIS -  %@",[wishListPreferenceJson objectForKey:key]);
+        Boolean checkOnDelete= true;
+        for(NSString *wish in cookieListWish){
+            if([wish isEqualToString:[[wishListPreferenceJson objectForKey:key] objectForKey:@"id"]]){
+                checkOnDelete = false;
+                NSLog(@"NOT DELETE THIS -  %@",[[wishListPreferenceJson objectForKey:key] objectForKey:@"id"]);
+            }
         }
+        if(checkOnDelete){
+            NSLog(@"DELETE THIS -  %@",[[wishListPreferenceJson objectForKey:key] objectForKey:@"id"]);
+            [deleteWishList addObject:key];
+            //NSArray *deleteWish = [[NSArray alloc] init];
+            //[wishListPreferenceJson removeObjectsForKeys:deleteWish];
+            //[deleteWish ]
+           // id bufKey = key;
+        }
+           // [wishListPreferenceJson removeObjectForKey:[[wishListPreferenceJson objectForKey:key] objectForKey:@"id"]];
+       // }
     }
     
+    for(NSString *key in deleteWishList){
+        [wishListPreferenceJson removeObjectForKey:key];
+    }
+   // [wishListPreferenceJson removeObjectForKey:@"83800"];
     NSLog(@"AFTER DELETE %@",wishListPreferenceJson);
     
+    
+    //THERE CHECK ON "NULL(COUNT OF ZURNAL), IF IT IS NULL
+    NSString *query_wish = @"";
+    for(NSString* key in wishListPreferenceJson) {
+        if([[[wishListPreferenceJson objectForKey:key] objectForKey:@"count"] isEqualToString:@"null"]){
+            query_wish = [NSString stringWithFormat:@"%@%@%@", query_wish, [[wishListPreferenceJson objectForKey:key] objectForKey:@"id"], @"_"];
+        }
+        //if(wishobjec.count == "null"){
+        //query_wish+=wishobjec.id+"";
+        //}
+    }
+    
+    
+    
+    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", webUrl, @"/getdate_php.php?wish_id=", query_wish, @"&action_type=get_count"];
+    
+    NSLog(@"URL CONNECTION %@", task_url);
     //NEW WISH LIST
 //    for(id wishJson in wishListPreferenceJson){
 //        NSLog(@"WISH AFTER ADD %@",[[wishListPreferenceJson objectForKey:wishJson] objectForKey:@"id"]);
@@ -173,14 +219,66 @@ bool IsGrantedNotificationAccess;
     /* GET STRING FROM WEBPAGE */
 
     NSURLSession *aSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    [[aSession dataTaskWithURL:[NSURL URLWithString:@"http://www3.presesserviss.lv/getdate_php.php?wish_id=84376_84372_84368_84370_84356_84352_&action_type=get_count"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[aSession dataTaskWithURL:[NSURL URLWithString:task_url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (((NSHTTPURLResponse *)response).statusCode == 200) {
             if (data) {
                 //ON POST EXECUTE EQUIVALENT
                 NSString *contentOfURL = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                
+                contentOfURL = [contentOfURL
+                                                 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+                contentOfURL = [contentOfURL
+                                stringByReplacingOccurrencesOfString:@"]" withString:@"-"];
                 NSLog(@"%@", contentOfURL);
                 
+                NSArray *wishInformationListString = [contentOfURL componentsSeparatedByString:@"-"];
                 
+                
+                NSMutableDictionary *wishNewInformation = [[NSMutableDictionary alloc] init];
+                
+                
+                //CREATE JSON WITH INFORMATION
+                for(NSString *wishInf in wishInformationListString){
+                   // NSLog(@"WISH INF %@", wishInf);
+
+                    NSData *data = [wishInf dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary *wishListPreferenceJsonBuf = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    
+                   // NSLog(@"wishListPreferenceJsonBuf %@", [wishListPreferenceJsonBuf objectForKey:@"id"]);
+                    
+                    //NSDictionary *wishListPreferenceJsonBuffer;
+                  //  wishListPreferenceJsonBuffer = [NSDictionary setValue:wishListPreferenceJsonBuf forKey:@"test"];
+                    //[wishListPreferenceJsonBuf mutableOrderedSetValueForKey:@"test"];
+                  //  [wishListPreferenceJsonBuf se]
+                    
+                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [wishListPreferenceJsonBuf objectForKey:@"id"], @"\":{\"id\":\"", [wishListPreferenceJsonBuf objectForKey:@"id"], "\",\"count\":\"",[wishListPreferenceJsonBuf objectForKey:@"count"] ,"\"}}"];
+                    
+                    
+                    data = [combined dataUsingEncoding:NSUTF8StringEncoding];
+                    wishListPreferenceJsonBuf = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    
+                    [wishNewInformation addEntriesFromDictionary:wishListPreferenceJsonBuf];
+                }
+                //NSLog(@"SECOND DATE JSON %@",wishNewInformation);
+                
+                
+                //UPDATE DATE IN MAIN JSON
+                for(NSString* key in wishNewInformation) {
+                    [wishListPreferenceJson removeObjectForKey:[[wishNewInformation objectForKey:key] objectForKey:@"id"]];
+                    
+                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], @"\":{\"id\":\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], "\",\"count\":\"",[[wishNewInformation objectForKey:key] objectForKey:@"id"] ,"\"}}"];
+                    
+                    NSData *data = [combined dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary *wishListNEW = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    
+                    //NSLog(@"%@",wishListNEW);
+                    
+                    [wishListPreferenceJson addEntriesFromDictionary:wishListNEW];
+                }
+                
+                
+                
+                [wishListPreferenceJson removeObjectForKey:@"(null)"];
                 
                 NSError *error;
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:wishListPreferenceJson
@@ -216,7 +314,7 @@ bool IsGrantedNotificationAccess;
 }
 
 
-/* TEST TIMER */
+/* GET CCOKIE AND SEND THEM TO THE SPECIAL ARRAY cookieListWish */
 - (void)getCookies {
     NSLog(@"imant cookies");
     NSString *urlCookie = @"http://www3.presesserviss.lv";
@@ -234,11 +332,13 @@ bool IsGrantedNotificationAccess;
                 forURL:[NSURL URLWithString:urlCookie]]; // send to URL, return NSArray
     for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
     {
+        
 //        NSLog(@"name: '%@'\n",   [cookie name]);
 //        NSLog(@"value: '%@'\n",  [cookie value]);
 //        NSLog(@"domain: '%@'\n", [cookie domain]);
 //        NSLog(@"path: '%@'\n",   [cookie path]);
         if([[cookie name] isEqualToString:@"wishlist"]){
+            
             NSString *list = [cookie value];
             cookieListWish = [list componentsSeparatedByString:@"-"];
 //            NSLog(@"%d", cookieListWish.count);
@@ -246,17 +346,28 @@ bool IsGrantedNotificationAccess;
 //                NSLog(@"WISHES: '%@'\n",wish);
 //            }
             
+            
             //DELETE "" NULL
             NSString *str;
-            for(int i=0;i<[cookieListWish count];i++)
-            {
-                str = [cookieListWish objectAtIndex:i];
-                if([str isEqualToString:@""])
+           // NSLog(@"TEST1");
+           // NSLog(@"name: '%lu'\n",   [cookieListWish count]);
+            if([cookieListWish count]!=1){
+                for(int i=0;i<[cookieListWish count];i++)
                 {
-                    [cookieListWish removeObjectAtIndex:i];
+                  //  NSLog(@"TEST2");
+                    str = [cookieListWish objectAtIndex:i];
+                    //NSLog(@"TEST3");
+                    if([str isEqualToString:@""])
+                    {
+                      //  NSLog(@"TEST4");
+                       // NSLog(i);
+                        [cookieListWish removeObjectAtIndex:i];
+                       // NSLog(@"TEST5");
+                    }
                 }
             }
             
+           // NSLog(@"TEST3");
 //            for(NSString *wish in cookieListWish){
 //                NSLog(@"WISH: '%@'\n",wish);
 //            }
@@ -281,15 +392,6 @@ bool IsGrantedNotificationAccess;
         [center addNotificationRequest:request withCompletionHandler:nil];
     }
 }
-/*
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    NSArray *cookies =[[NSArray alloc]init];
-    cookies = [NSHTTPCookie
-               cookiesWithResponseHeaderFields:[response allHeaderFields]
-               forURL:[NSURL URLWithString:@""]]; // send to URL, return NSArray
-}
- */
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     
@@ -303,10 +405,11 @@ bool IsGrantedNotificationAccess;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSLog(@"imant applicationDidEnterBackground");
-  
+    [self setCookiePreferenceTimer];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"imant applicationWillEnterForeground");
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
@@ -314,6 +417,7 @@ bool IsGrantedNotificationAccess;
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    NSLog(@"imant applicationDidBecomeActive");
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
