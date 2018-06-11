@@ -8,6 +8,8 @@
 
 #import "WebViewAppDelegate.h"
 #import "WebViewController.h"
+#import "NotiFicationSend.h"
+
 
 @interface Util:NSObject
 - (NSData *)parseJson:(NSString *) jsonstring;
@@ -22,6 +24,27 @@ bool IsGrantedNotificationAccess;
 
 #pragma mark -
 #pragma mark Application lifecycle
+
+-(void)application:(UIApplication *)application
+performFetchWithCompletionHandler:
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    
+    
+    
+    BOOL downloadSuccessful = YES;
+    
+    if (downloadSuccessful) {
+        //---set the flag that data is successfully downloaded---
+        NotiFicationSend* mainVC = [[NotiFicationSend alloc] init];
+        
+        [mainVC startCheck];
+        completionHandler(UIBackgroundFetchResultNewData);
+    } else {
+        //---set the flag that download is not successful---
+        completionHandler(UIBackgroundFetchResultFailed);
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     //NSLog(@"imant can");
@@ -42,6 +65,9 @@ bool IsGrantedNotificationAccess;
     
     /* TEST TIMER SET COOKIEE PREFENECE */
     //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(setCookiePreferenceTimer) userInfo:nil repeats:YES];
+    [[UIApplication sharedApplication]
+     setMinimumBackgroundFetchInterval:
+     UIApplicationBackgroundFetchIntervalMinimum];
     /* TEST TIMER */
     
     /* TEST SCHEDULE CHECK UPDATES */
@@ -76,12 +102,12 @@ bool IsGrantedNotificationAccess;
 }
 
 /* TIMER CHECK UPDATES */
--(void) checkUpdatesTimer{
-    NSLog(@"imant CHECK UPDATES");
-    //[self getCookies];
-    //[self showNotification];
-    //[self setCookiePreference];
-}
+//-(void) checkUpdatesTimer{
+//    NSLog(@"imant CHECK UPDATES");
+//    //[self getCookies];
+//    //[self showNotification];
+//    //[self setCookiePreference];
+//}
 
 /* TIMER SET COOKIE PREFERENCE */
 -(void) setCookiePreferenceTimer{
@@ -207,7 +233,7 @@ bool IsGrantedNotificationAccess;
     
     
     
-    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", webUrl, @"/getdate_php.php?wish_id=", query_wish, @"&action_type=get_count"];
+    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://presesapp.sem.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_count"];
     
     NSLog(@"URL CONNECTION %@", task_url);
     //NEW WISH LIST
@@ -266,7 +292,7 @@ bool IsGrantedNotificationAccess;
                 for(NSString* key in wishNewInformation) {
                     [wishListPreferenceJson removeObjectForKey:[[wishNewInformation objectForKey:key] objectForKey:@"id"]];
                     
-                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], @"\":{\"id\":\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], "\",\"count\":\"",[[wishNewInformation objectForKey:key] objectForKey:@"id"] ,"\"}}"];
+                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], @"\":{\"id\":\"", [[wishNewInformation objectForKey:key] objectForKey:@"id"], "\",\"count\":\"",[[wishNewInformation objectForKey:key] objectForKey:@"count"] ,"\"}}"];
                     
                     NSData *data = [combined dataUsingEncoding:NSUTF8StringEncoding];
                     NSDictionary *wishListNEW = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -276,9 +302,9 @@ bool IsGrantedNotificationAccess;
                     [wishListPreferenceJson addEntriesFromDictionary:wishListNEW];
                 }
                 
-                
-                
                 [wishListPreferenceJson removeObjectForKey:@"(null)"];
+                
+                NSLog(@"BEFORE PREFERENCE SAVE %@",wishListPreferenceJson);
                 
                 NSError *error;
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:wishListPreferenceJson
@@ -375,13 +401,13 @@ bool IsGrantedNotificationAccess;
     }
 }
 
--(void)showNotification {
+-(void)showNotification:(NSString*) body {
     if(IsGrantedNotificationAccess){
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.title = @"Notif tittle";
-        content.subtitle = @"Notif subtile";
-        content.body = @"Notif body";
+        content.title = @"PRESESSERVISS";
+        content.subtitle = @"AVAILABLE FOR SALE";
+        content.body = body;
         content.sound = [UNNotificationSound defaultSound];
         
         

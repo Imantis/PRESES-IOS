@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A53949E20C1252800A4E31C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A53949D20C1252800A4E31C /* UserNotifications.framework */; };
+		1A926BF920CA9101009CF05A /* NotiFicationSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BF820CA9101009CF05A /* NotiFicationSend.m */; };
 		1ACB025920BEB420009E18B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACB025820BEB420009E18B0 /* Images.xcassets */; };
 		1D3623260D0F684500981E51 /* WebViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WebViewAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -25,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		1A53949D20C1252800A4E31C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		1A926BF720CA9101009CF05A /* NotiFicationSend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotiFicationSend.h; sourceTree = "<group>"; };
+		1A926BF820CA9101009CF05A /* NotiFicationSend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotiFicationSend.m; sourceTree = "<group>"; };
 		1ACB025720BEB056009E18B0 /* WebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebView.entitlements; sourceTree = "<group>"; };
 		1ACB025820BEB420009E18B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Team App/Images.xcassets"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +72,8 @@
 				1D3623250D0F684500981E51 /* WebViewAppDelegate.m */,
 				5B1E4E1712D9613800E21029 /* WebViewController.h */,
 				5B1E4E1812D9613800E21029 /* WebViewController.m */,
+				1A926BF720CA9101009CF05A /* NotiFicationSend.h */,
+				1A926BF820CA9101009CF05A /* NotiFicationSend.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -168,6 +173,9 @@
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 5KN3724YWT;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -217,6 +225,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* WebViewAppDelegate.m in Sources */,
+				1A926BF920CA9101009CF05A /* NotiFicationSend.m in Sources */,
 				5B1E4E1912D9613800E21029 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

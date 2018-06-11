@@ -35,6 +35,10 @@
 	</dict>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>MainWindow</string>
 	<key>UIRequiresFullScreen</key>

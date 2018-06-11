@@ -19,6 +19,8 @@
 
 -(void) setCookiePreferenceTimer;
 
+-(void)showNotification:(NSString*) body;
+
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navigationController;
 
