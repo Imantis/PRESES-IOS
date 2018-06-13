@@ -139,7 +139,7 @@
                                stringByReplacingOccurrencesOfString:@"]delimeter][" withString:@"[some_delimeter]"];
                 wishInformationString = [wishInformationString
                                stringByReplacingOccurrencesOfString:@"][delimeter]" withString:@""];
-                //NSLog(@"%@", wishInformationString);
+                //NSLog(@"wishInformationString %@", wishInformationString);
 
                 NSArray *wishInformationListStringNotifications = [wishInformationString componentsSeparatedByString:@"[some_delimeter]"];
 
@@ -147,12 +147,14 @@
 
                 //CREATE JSON WITH INFORMATION FOR NOTIFICATION
                 for(NSString *wishInf in wishInformationListStringNotifications){
-                    // NSLog(@"WISH INF %@", wishInf);
+                     NSLog(@"WISH INF %@", wishInf);
 
                     NSData *data = [wishInf dataUsingEncoding:NSUTF8StringEncoding];
                     NSDictionary *wishListPreferenceJsonBuf = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 
-                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [wishListPreferenceJsonBuf objectForKey:@"id"], @"\":{\"id\":\"", [wishListPreferenceJsonBuf objectForKey:@"id"], "\",\"tittle\":\"",[wishListPreferenceJsonBuf objectForKey:@"tittle"] ,"\"}}"];
+                   // NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s", @"{\"", [wishListPreferenceJsonBuf objectForKey:@"id"], @"\":{\"id\":\"", [wishListPreferenceJsonBuf objectForKey:@"id"], "\",\"tittle\":\"",[wishListPreferenceJsonBuf objectForKey:@"tittle"] ,"\"}}"];
+                    
+                    NSString *combined = [NSString stringWithFormat:@"%@%@%@%@%s%@%s%@%s", @"{\"", [wishListPreferenceJsonBuf objectForKey:@"id"], @"\":{\"id\":\"", [wishListPreferenceJsonBuf objectForKey:@"id"], "\",\"send_newsletter\":\"", [wishListPreferenceJsonBuf objectForKey:@"send_newsletter"], "\",\"tittle\":\"", [wishListPreferenceJsonBuf objectForKey:@"tittle"] ,"\"}}"];
 
 
                     data = [combined dataUsingEncoding:NSUTF8StringEncoding];
@@ -162,15 +164,22 @@
                 }
                 
                 NSLog(@"INFORMATION FOR NOTIFICATION %@", wishNewInformationNotification);
-                
+                //SHOW NOTIFICATION
                 NSString *body = @"";
                 for(NSString *key in changeWish){
-                    NSLog(@"SHOW NOTIFICATION ID - %@", key);
                     
-                    //SHOW NOTIFICATION
+                    if([[[wishNewInformationNotification objectForKey:key] objectForKey:@"send_newsletter"] isEqualToString:@"1"]){
+                        NSLog(@"SHOW NOTIFICATION ID - %@", key);
+                        
+                        body = [NSString stringWithFormat:@"%@%@%@", body, @"\n", [[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"]];
+                    }
+                    
+                }
+                NSLog(@"BODY %@", body);
+                
+                
+                if(!([body isEqualToString:@""])){
                     WebViewAppDelegate* mainVC = [[WebViewAppDelegate alloc] init];
-                    
-                    body = [NSString stringWithFormat:@"%@%@%@", body, @"\n", [[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"]];
                     [mainVC showNotification: body];
                 }
                 //NSLog(@"UNICODE TEST %@", [[wishNewInformationNotification objectForKey:@"83603"] objectForKey:@"tittle"]);
