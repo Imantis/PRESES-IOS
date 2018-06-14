@@ -44,9 +44,9 @@
         query_wish = [NSString stringWithFormat:@"%@%@%@", query_wish, [[wishListPreferenceJson objectForKey:key] objectForKey:@"id"], @"_"];
     }
     
-    //NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", webUrl, @"/getdate_php.php?wish_id=", query_wish, @"&action_type=get_count"];
+    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://www3.presesserviss.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_new_count"];
     
-    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://presesapp.sem.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_new_count"];
+    //NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://presesapp.sem.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_new_count"];
     
     NSLog(@"URL CONNECTION %@", task_url);
     /* GET STRING FROM WEBPAGE */
@@ -166,12 +166,26 @@
                 NSLog(@"INFORMATION FOR NOTIFICATION %@", wishNewInformationNotification);
                 //SHOW NOTIFICATION
                 NSString *body = @"";
+                NSString *notification_tittle = @"";
                 for(NSString *key in changeWish){
                     
                     if([[[wishNewInformationNotification objectForKey:key] objectForKey:@"send_newsletter"] isEqualToString:@"1"]){
                         NSLog(@"SHOW NOTIFICATION ID - %@", key);
                         
-                        body = [NSString stringWithFormat:@"%@%@%@", body, @"\n", [[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"]];
+                        if([[[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"] containsString:@"[:ru]"]){
+                            NSArray *arrayWithTwoStrings = [[[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"] componentsSeparatedByString:@"[:ru]"];
+                            if([[self getCookiesLanguage] isEqualToString:@"lv"]){
+                                notification_tittle = [arrayWithTwoStrings objectAtIndex:0];
+                                notification_tittle = [notification_tittle stringByReplacingOccurrencesOfString:@"[:lv]" withString:@""];
+                            }else{
+                                notification_tittle = [arrayWithTwoStrings objectAtIndex:1];
+                                }
+                        }else{
+                                notification_tittle = [[wishNewInformationNotification objectForKey:key] objectForKey:@"tittle"];
+                            }
+
+                        
+                        body = [NSString stringWithFormat:@"%@%@%@", body, @"\n", notification_tittle];
                     }
                     
                 }
@@ -206,8 +220,34 @@
             }
         }
     }] resume];
+    NSLog(@"LANGUAGE -  %@", [self getCookiesLanguage]);
     NSLog(@"Background fetch completed...");
     
+}
+
+
+/* GET CCOKIE AND SEND THEM TO THE SPECIAL ARRAY cookieListWish */
+- (NSString *)getCookiesLanguage {
+    NSLog(@"imant cookies");
+    NSString *urlCookie = @"http://www3.presesserviss.lv";
+    
+    NSHTTPURLResponse * response;
+    NSError * error;
+    NSMutableURLRequest *request;
+    request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlCookie] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120];
+    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSArray *cookies =[[NSArray alloc]init];
+    cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields]
+    forURL:[NSURL URLWithString:urlCookie]]; // send to URL, return NSArray
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
+    {
+        if([[cookie name] isEqualToString:@"qtrans_front_language"]){
+            NSString *list = [cookie value];
+            return list;
+        }
+    }
+    return @"";
 }
 
 @end

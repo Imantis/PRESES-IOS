@@ -233,7 +233,7 @@ performFetchWithCompletionHandler:
     
     
     
-    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://presesapp.sem.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_count"];
+    NSString *task_url = [NSString stringWithFormat:@"%@%@%@%@", @"http://www3.presesserviss.lv", @"/getdate.php?wish_id=", query_wish, @"&action_type=get_count"];
     
     NSLog(@"URL CONNECTION %@", task_url);
     //NEW WISH LIST
