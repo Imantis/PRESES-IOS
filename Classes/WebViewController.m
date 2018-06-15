@@ -30,9 +30,10 @@
     //add the web view
 	theWebView = [[UIWebView alloc] initWithFrame:webFrame];
 	theWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	theWebView.scalesPageToFit = YES;
+	theWebView.scalesPageToFit = NO;
 	theWebView.delegate = self;
-	
+	//[theWebView setDataDetectorTypes: UIDataDetectorTypeNone];
+    
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *req = [NSURLRequest requestWithURL:url];
 	[theWebView loadRequest:req];

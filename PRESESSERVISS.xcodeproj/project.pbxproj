@@ -33,19 +33,19 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* WebViewAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* WebViewAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* WebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* PRESESSERVISS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRESESSERVISS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* WebView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebView_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* PRESESSERVISS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRESESSERVISS_Prefix.pch; sourceTree = "<group>"; };
 		5B1E4E1712D9613800E21029 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		5B1E4E1812D9613800E21029 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		5B1E4F2512D9932000E21029 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backIcon.png; path = images/backIcon.png; sourceTree = "<group>"; };
 		5B1E4F2612D9932000E21029 /* backIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backIcon@2x.png"; path = "images/backIcon@2x.png"; sourceTree = "<group>"; };
 		5B1E4F2712D9932000E21029 /* forwardIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forwardIcon.png; path = images/forwardIcon.png; sourceTree = "<group>"; };
 		5B1E4F2812D9932000E21029 /* forwardIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forwardIcon@2x.png"; path = "images/forwardIcon@2x.png"; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* WebView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebView-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* PRESESSERVISS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PRESESSERVISS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D00E7F06141099640020894A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -81,7 +81,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* WebView.app */,
+				1D6058910D05DD3D006BFB54 /* PRESESSERVISS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,7 +103,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* WebView_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* PRESESSERVISS_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -115,7 +115,7 @@
 				1ACB025820BEB420009E18B0 /* Images.xcassets */,
 				5B1E4EBC12D97F9E00E21029 /* images */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* WebView-Info.plist */,
+				8D1107310486CEB800E47090 /* PRESESSERVISS-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -159,7 +159,7 @@
 			);
 			name = "Team App";
 			productName = WebView;
-			productReference = 1D6058910D05DD3D006BFB54 /* WebView.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* PRESESSERVISS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WebView" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PRESESSERVISS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -246,11 +246,11 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WebView_Prefix.pch;
-				INFOPLIST_FILE = "WebView-Info.plist";
+				GCC_PREFIX_HEADER = PRESESSERVISS_Prefix.pch;
+				INFOPLIST_FILE = "PRESESSERVISS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = WebView;
+				PRODUCT_NAME = PRESESSERVISS;
 			};
 			name = Debug;
 		};
@@ -265,11 +265,11 @@
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 5KN3724YWT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = WebView_Prefix.pch;
-				INFOPLIST_FILE = "WebView-Info.plist";
+				GCC_PREFIX_HEADER = PRESESSERVISS_Prefix.pch;
+				INFOPLIST_FILE = "PRESESSERVISS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = WebView;
+				PRODUCT_NAME = PRESESSERVISS;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -363,7 +363,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WebView" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PRESESSERVISS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

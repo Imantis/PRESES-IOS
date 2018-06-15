@@ -91,7 +91,7 @@ performFetchWithCompletionHandler:
 	webViewController.urlString = @"http://www3.presesserviss.lv";
     webUrl = webViewController.urlString;
     
-	[navigationController pushViewController:webViewController animated:NO];
+	[navigationController pushViewController:webViewController animated:YES];
 	[webViewController release];
 	
     [self.window setRootViewController:navigationController];
