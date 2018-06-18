@@ -7,17 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <WebKit/WebKit.h>
 
 @interface WebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
 
-	UIWebView	*theWebView;
+	WKWebView	*theWebView;
+    //UIWebView    *theWebView;
 	NSString	*urlString;
     UIActivityIndicatorView  *whirl;
 
 }
 
 -(void) updateToolbar;
+
+//- (void)webView:(WKWebView *)webView
+//didFinishNavigation:(WKNavigation *)navigation;
+//
+//- (void)webView:(WKWebView *)webView
+//didStartProvisionalNavigation:(WKNavigation *)navigation;
 
 @property (nonatomic, retain) NSString *urlString;
 

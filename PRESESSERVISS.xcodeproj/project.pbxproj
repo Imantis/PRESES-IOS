@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A53949E20C1252800A4E31C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A53949D20C1252800A4E31C /* UserNotifications.framework */; };
 		1A926BF920CA9101009CF05A /* NotiFicationSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A926BF820CA9101009CF05A /* NotiFicationSend.m */; };
+		1ABDE1CA20D799D5008CD98D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABDE1C920D799D5008CD98D /* WebKit.framework */; };
 		1ACB025920BEB420009E18B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACB025820BEB420009E18B0 /* Images.xcassets */; };
 		1D3623260D0F684500981E51 /* WebViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WebViewAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -28,6 +29,7 @@
 		1A53949D20C1252800A4E31C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		1A926BF720CA9101009CF05A /* NotiFicationSend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotiFicationSend.h; sourceTree = "<group>"; };
 		1A926BF820CA9101009CF05A /* NotiFicationSend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotiFicationSend.m; sourceTree = "<group>"; };
+		1ABDE1C920D799D5008CD98D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1ACB025720BEB056009E18B0 /* WebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebView.entitlements; sourceTree = "<group>"; };
 		1ACB025820BEB420009E18B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Team App/Images.xcassets"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ABDE1CA20D799D5008CD98D /* WebKit.framework in Frameworks */,
 				1A53949E20C1252800A4E31C /* UserNotifications.framework in Frameworks */,
 				D00E7F07141099640020894A /* iAd.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -123,6 +126,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1ABDE1C920D799D5008CD98D /* WebKit.framework */,
 				1A53949D20C1252800A4E31C /* UserNotifications.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,

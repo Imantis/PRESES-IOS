@@ -18,6 +18,7 @@
 }
 
 -(void) setCookiePreferenceTimer;
+-(void) getCookies;
 
 -(void)showNotification:(NSString*) body;
 

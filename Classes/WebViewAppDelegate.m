@@ -29,21 +29,18 @@ bool IsGrantedNotificationAccess;
 performFetchWithCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     
-    
-    
-    
-    BOOL downloadSuccessful = YES;
-    
-    if (downloadSuccessful) {
+//    BOOL downloadSuccessful = YES;
+//
+//    if (downloadSuccessful) {
         //---set the flag that data is successfully downloaded---
         NotiFicationSend* mainVC = [[NotiFicationSend alloc] init];
         
         [mainVC startCheck];
         completionHandler(UIBackgroundFetchResultNewData);
-    } else {
-        //---set the flag that download is not successful---
-        completionHandler(UIBackgroundFetchResultFailed);
-    }
+//    } else {
+//        //---set the flag that download is not successful---
+//        completionHandler(UIBackgroundFetchResultFailed);
+//    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
@@ -359,8 +356,8 @@ performFetchWithCompletionHandler:
     for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
     {
         
-//        NSLog(@"name: '%@'\n",   [cookie name]);
-//        NSLog(@"value: '%@'\n",  [cookie value]);
+        NSLog(@"name: '%@'\n",   [cookie name]);
+        NSLog(@"value: '%@'\n",  [cookie value]);
 //        NSLog(@"domain: '%@'\n", [cookie domain]);
 //        NSLog(@"path: '%@'\n",   [cookie path]);
         if([[cookie name] isEqualToString:@"wishlist"]){
@@ -431,6 +428,7 @@ performFetchWithCompletionHandler:
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSLog(@"imant applicationDidEnterBackground");
+  //  [self getCookies];
     [self setCookiePreferenceTimer];
 }
 
