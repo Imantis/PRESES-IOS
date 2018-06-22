@@ -62,6 +62,7 @@ performFetchWithCompletionHandler:
     
     /* TEST TIMER SET COOKIEE PREFENECE */
     //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(setCookiePreferenceTimer) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkUpdatesTimer) userInfo:nil repeats:YES];
     [[UIApplication sharedApplication]
      setMinimumBackgroundFetchInterval:
      UIApplicationBackgroundFetchIntervalMinimum];
@@ -430,6 +431,15 @@ performFetchWithCompletionHandler:
     NSLog(@"imant applicationDidEnterBackground");
   //  [self getCookies];
     [self setCookiePreferenceTimer];
+   // [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkUpdatesTimer) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(setCookiePreferenceTimer) userInfo:nil repeats:YES];
+//    while(1!=2){
+//        [NSThread sleepForTimeInterval: 1];
+//        //NotiFicationSend* mainVC = [[NotiFicationSend alloc] init];
+//       // [mainVC startCheck];
+//        NSLog(@"BACKGROUND TASK");
+//    }
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

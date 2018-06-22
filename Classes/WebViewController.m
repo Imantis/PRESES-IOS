@@ -72,7 +72,7 @@
 
     [self.view addSubview: theWebView];
     
-    
+  //  [self setEmailCookie];
 //    WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
 //    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:theConfiguration];
 //    webView.navigationDelegate = self;
@@ -98,6 +98,41 @@
 	
     [self updateToolbar];
 
+}
+
+/* set email cookie*/
+- (void)setEmailCookie {
+    NSLog(@"IMANT setEmailCookie");
+    NSString *urlCookie = @"http://www3.presesserviss.lv";
+    NSHTTPURLResponse * response;
+    NSError * error;
+    NSMutableURLRequest *request;
+    request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlCookie]
+                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                           timeoutInterval:120];
+    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+    NSArray *cookies =[[NSArray alloc]init];
+    cookies = [NSHTTPCookie
+                   cookiesWithResponseHeaderFields:[response allHeaderFields]
+                   forURL:[NSURL URLWithString:urlCookie]]; // send to URL, return NSArray
+        
+    Boolean checkOnEmail = false;
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
+    {
+//        NSLog(@"name: '%@'\n",   [cookie name]);
+//        NSLog(@"value: '%@'\n",  [cookie value]);
+        if([[cookie name] isEqualToString:@"wishlist-email"]){
+            checkOnEmail = true;
+        }
+    }
+    if(!checkOnEmail){
+        NSLog(@"CREATE EMAIL");
+        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www3.presesserviss.lv"]];
+        [request addValue:@"TeskCookieKey1=TeskCookieValue1;TeskCookieKey2=TeskCookieValue2;" forHTTPHeaderField:@"Cookie"];
+            // use stringWithFormat: in the above line to inject your values programmatically
+        [theWebView loadRequest:request];
+    }
 }
 
 //- (void)webView:(WKWebView *)webView
