@@ -100,12 +100,16 @@ performFetchWithCompletionHandler:
 }
 
 /* TIMER CHECK UPDATES */
-//-(void) checkUpdatesTimer{
-//    NSLog(@"imant CHECK UPDATES");
-//    //[self getCookies];
-//    //[self showNotification];
-//    //[self setCookiePreference];
-//}
+-(void) checkUpdatesTimer{
+    while(1!=2){
+        [NSThread sleepForTimeInterval: 0.5];
+        NSLog(@"imant CHECK UPDATES");
+    }
+    
+    //[self getCookies];
+    //[self showNotification];
+    //[self setCookiePreference];
+}
 
 /* TIMER SET COOKIE PREFERENCE */
 -(void) setCookiePreferenceTimer{
@@ -431,6 +435,22 @@ performFetchWithCompletionHandler:
     NSLog(@"imant applicationDidEnterBackground");
   //  [self getCookies];
     [self setCookiePreferenceTimer];
+    
+//    dispatch_queue_t myQueue = dispatch_queue_create("unique_queue_name", NULL);
+//    
+//    dispatch_async(myQueue, ^{
+//        [self checkUpdatesTimer];
+//        //stuffs to do in background thread
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            //stuffs to do in foreground thread, mostly UI updates
+//        });
+//    });
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:0.5
+//                                             target:self
+//                                           selector:@selector(checkUpdatesTimer:)
+//                                           userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
    // [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkUpdatesTimer) userInfo:nil repeats:YES];
     //[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(setCookiePreferenceTimer) userInfo:nil repeats:YES];
 //    while(1!=2){
