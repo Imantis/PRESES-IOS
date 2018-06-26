@@ -216,6 +216,7 @@
        // [mainVC setCookiePreferenceTimer];
        // [NSThread sleepForTimeInterval: 1];
     [mainVC setCookiePreferenceTimer];
+    
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
@@ -325,6 +326,8 @@
     }
 
     NSLog(@"IMANT BUTTON OPEN URL");
+    
+ //   [self setEmailCookie];
 }
 
 - (void)shareAction {
